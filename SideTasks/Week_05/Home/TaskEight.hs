@@ -20,13 +20,13 @@ main = do
     print $ magnitude (0, -1, -2) == 2.23606797749979
     print $ magnitude (155, 10, -5) == 155.40270267920053
 
-type Vector3D a = (a, a, a)
+type Vector a = (a, a, a)
 
-dotProduct :: Num a => Vector3D a -> Vector3D a -> a
+dotProduct :: (Num a) => Vector a -> Vector a -> a
 dotProduct (x1, x2, x3) (y1, y2, y3) = x1 * y1 + x2 * y2 + x3 * y3
 
-crossProduct :: Num a => Vector3D a -> Vector3D a -> Vector3D a
+crossProduct :: (Num a) => Vector a -> Vector a -> Vector a
 crossProduct (x1, x2, x3) (y1, y2, y3) = (x2 * y3 - (x3 * y2), x3 * y1 - (x1 * y3), x1 * y2 - (x2 * y1))
 
-magnitude :: Floating a => Vector3D a -> a
+magnitude :: (Floating a) => Vector a -> a
 magnitude (x1, x2, x3) = sqrt (x1 ^ 2 + x2 ^2 + x3 ^2)

@@ -19,10 +19,11 @@ main = do
     --print $ canCarry 13 (-25) 2 -- error: John's hosting capacity was negative
     --print $ canCarry 13 25 (-2) -- error: The weight of a product was negative
 
-canCarry :: Double -> Double -> Double -> [Char]
+-- Не е възможно броят продукти да е Double. Помисли отново какъв е типът.
+canCarry :: Int -> Double -> Double -> [Char]
 canCarry c k w
     | c < 0      = error "The number of products was negative"
     | k < 0      = error "John's hosting capacity was negative"
     | w < 0      = error "The weight of a product was negative"
-    | w * c <= k = "Yes"
+    | w * fromIntegral c <= k = "Yes"
     | otherwise  = "No"

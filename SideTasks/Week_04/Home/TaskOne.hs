@@ -24,7 +24,6 @@ mySumRecNonPM xs
 
 mySumRecPM :: [Int] -> Int
 mySumRecPM []     = 0
-mySumRecPM [x]    = x
 mySumRecPM (x:xs) = x + mySumRecPM xs
 
 mySumFunc :: [Int] -> Int

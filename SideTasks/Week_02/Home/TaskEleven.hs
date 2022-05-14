@@ -15,8 +15,14 @@ isPrime x = x > 2 && acc (floor $ sqrt $ fromIntegral x)
             | mod x n == 0 = False
             | otherwise    = acc (n - 1)
 
+
+-- Добре е да напишеш truncatablePrime без гардове.
 truncatablePrime :: Int -> Bool
 truncatablePrime 0 = True
-truncatablePrime x
+truncatablePrime x = isPrime x && truncatablePrime' (div x 10)
+
+truncatablePrime' :: Int -> Bool
+truncatablePrime' 0 = True
+truncatablePrime' x
     | isPrime x = truncatablePrime (div x 10)
-    | otherwise = False 
+    | otherwise = False

@@ -16,5 +16,8 @@ repeat' str glue 0 = []
 repeat' str glue 1 = str
 repeat' str glue n = str ++ glue ++ repeat' str glue (n - 1)
 
+repeater' :: [Char] -> (Int -> [Char] -> [Char])
+repeater' str = (\count glue -> repeat' str glue count)
+
 repeater :: [Char] -> (Int -> [Char] -> [Char])
-repeater str = (\count glue -> repeat' str glue count)
+repeater str = (\n glue -> init $ concat $ take n (repeat (str ++ glue)))

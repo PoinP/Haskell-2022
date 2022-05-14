@@ -27,17 +27,24 @@ main = do
 type Rat = (Int, Int)
 
 normalize :: Rat -> Rat
+normalize (_, 0)   = error "Division by zero!"
 normalize (x1, x2) = (div x1 d, div x2 d)
     where d = gcd x1 x2
 
 sumRats :: Rat -> Rat -> Rat
+sumRats (_, 0) _          = error "Division by zero!"
+sumRats _ (_, 0)          = error "Division by zero!"
 sumRats (x1, x2) (y1, y2) = normalize ((x1 * div m x2) + (y1 * div m y2), m)
     where m = lcm x2 y2
 
 multiplyRats :: Rat -> Rat -> Rat
+multiplyRats (_, 0) _          = error "Division by zero!"
+multiplyRats _ (_, 0)          = error "Division by zero!"
 multiplyRats (x1, x2) (y1, y2) = normalize (x1 * y1, x2 * y2)
 
 divideRats :: Rat -> Rat -> Rat
+divideRats (_, 0) _          = error "Division by zero!"
+divideRats _ (_, 0)          = error "Division by zero!"
 divideRats (x1, x2) (y1, y2) = multiplyRats (x1, x2) (y2, y1)
 
 areEqual :: Rat -> Rat -> Bool

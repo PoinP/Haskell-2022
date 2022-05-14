@@ -1,5 +1,7 @@
 -- Define a function that sorts a number in descending order.
 
+import Data.List
+
 main :: IO()
 main = do
     print $ sortN 1714 == 7411
@@ -33,30 +35,5 @@ listToNum xs = acc xs 0
         acc [] num     = num
         acc (x:xs) num = acc xs (num * 10 + x)
 
-removeFirstOccurrence :: Int -> Int -> Int
-removeFirstOccurrence x y
-    | x == y = 0
-    | otherwise = acc (numToList x) y []
-        where
-            acc :: [Int] -> Int -> [Int] -> Int
-            acc [] _ ns = listToNum (reverseList ns)
-            acc (x:xs) y ns
-                | x == y    = acc xs (-1) ns
-                | otherwise = acc xs y (ns ++ [x])
-
-getBiggest :: Int -> Int 
-getBiggest x = acc x 0
-    where
-        acc :: Int -> Int -> Int
-        acc 0 max = max
-        acc x max
-            | mod x 10 > max = acc (div x 10) (mod x 10)
-            | otherwise      = acc (div x 10) max
-
 sortN :: Int -> Int
-sortN x
-    | x < 10 = x
-    | otherwise = acc x 0
-        where
-            acc 0 n = 0 + (n * 10)
-            acc x n = acc (removeFirstOccurrence x (getBiggest x)) (getBiggest x + (n * 10))
+sortN = listToNum . reverseList . sort . numToList
