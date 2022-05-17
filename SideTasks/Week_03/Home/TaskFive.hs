@@ -14,7 +14,6 @@ main = do
     print $ p 5 == 35
     print $ p 6 == 51
 
-
 p :: Int -> Int
 p x
     | x < 1 = error "Input Error: x must be greater than 0!"
