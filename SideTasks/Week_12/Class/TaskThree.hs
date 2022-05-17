@@ -12,7 +12,7 @@ t2 :: BTree
 t2 = Node 8 (Node 3 (Node 9 Empty Empty) (Node 10 Empty Empty)) (Node 10 (Node 11 Empty Empty) (Node 14 Empty Empty))
 
 getLevel :: BTree -> Int -> [Int]
-getLevel Empty _          = []
+getLevel Empty _        = []
 getLevel (Node v l r) 0 = [v]
 getLevel (Node v l r) n = getLevel l (n - 1) ++ getLevel r (n - 1)
 

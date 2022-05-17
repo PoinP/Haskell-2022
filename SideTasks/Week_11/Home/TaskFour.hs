@@ -16,13 +16,10 @@ t1 = Node 1 [Node 3 [Nil], Node 5 [Nil], Node 7 [Nil], Node 9 [Nil]]
 t2 :: NTree Int
 t2 = Node 7 [Node 9 [Node 5 [Nil], Node 2 [Nil]]]
 
-isEven :: Int -> Bool
-isEven x = mod x 2 == 0
-
 areChildrenGraceful :: Int -> [NTree Int] -> Bool
 areChildrenGraceful _ []     = True
 areChildrenGraceful v (Nil:xs) = True
-areChildrenGraceful v cs@((Node v' _):cs') = isEven (abs (v - v')) && areChildrenGraceful v cs'
+areChildrenGraceful v cs@((Node v' _):cs') = even (abs (v - v')) && areChildrenGraceful v cs'
 
 isGraceful :: NTree Int -> Bool
 isGraceful Nil = True

@@ -35,8 +35,8 @@ cityTemp :: City -> Double
 cityTemp (City _ _ t) = t
 
 coldestCity :: [City] -> City
-coldestCity cs = foldr (\c coldest -> if cityTemp c < cityTemp coldest then c else coldest) (head cs) cs
+coldestCity = foldr1 (\c1@(City _ _ t1) c2@(City _ _ t2) -> if t1 < t2 then c1 else c2)
 
 coldestCapital :: [Country] -> Name
-coldestCapital cs = countryName $ foldr (\c coldest -> if lowestTemp c < lowestTemp coldest then c else coldest) (head cs) cs
+coldestCapital = countryName . foldr1 (\c1 c2 -> if lowestTemp c1 < lowestTemp c2 then c1 else c2)
     where lowestTemp c = cityTemp $ coldestCity $ countryCities c

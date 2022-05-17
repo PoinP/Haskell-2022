@@ -19,5 +19,7 @@ repeat' str glue n = str ++ glue ++ repeat' str glue (n - 1)
 repeater' :: [Char] -> (Int -> [Char] -> [Char])
 repeater' str = (\count glue -> repeat' str glue count)
 
+
+-- Why isn't this a one line solution?
 repeater :: [Char] -> (Int -> [Char] -> [Char])
 repeater str = (\n glue -> init $ concat $ take n (repeat (str ++ glue)))

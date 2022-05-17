@@ -12,7 +12,7 @@ main = do
     print $ height numberBTree == 4
     print $ height charBTree == 3
 
-    print $ average numberBTree == 16.22222222222222
+    print $ average numberBTree == 16.22
     --print $ average charBTree -- should not work
 
     print $ sumLeaves numberBTree == 119
@@ -41,16 +41,16 @@ height :: BTree a -> Int
 height Nil = 0
 height (Node v l r) = max (treeSize l) (treeSize r)
 
-average :: BTree Int -> Double
-average t = fromIntegral (treeSum t) / fromIntegral (treeSize t)
+average :: (Num a, Integral a) => BTree a -> Double
+average t = roundToTwoDigits $ fromIntegral (treeSum t) / fromIntegral (treeSize t)
 
-sumLeaves :: BTree Int -> Int
+sumLeaves :: (Num a) => BTree a -> a
 sumLeaves Nil = 0
 sumLeaves (Node v Nil Nil) = v
 sumLeaves (Node v l r) = sumLeaves l + sumLeaves r
 
 areEqual :: (Eq a) => BTree a -> BTree a -> Bool
-areEqual t1 t2 = traverseTree t1 == traverseTree t2
+areEqual t1 t2 = t1 == t2
 
 setLevels :: BTree a -> BTree (Int, a)
 setLevels t = acc t 0
@@ -62,15 +62,13 @@ mirrorTree :: BTree a -> BTree a
 mirrorTree Nil = Nil
 mirrorTree (Node v l r) = Node v (mirrorTree r) (mirrorTree l)
 
-
-traverseTree :: BTree a -> [a]
-traverseTree Nil = []
-traverseTree (Node v l r) = v : traverseTree l ++ traverseTree r
-
 treeSize :: BTree a -> Int
 treeSize Nil = 0
 treeSize (Node v l r) = 1 + treeSize l + treeSize r
 
-treeSum :: BTree Int -> Int
+treeSum :: (Num a) => BTree a -> a
 treeSum Nil = 0
 treeSum (Node v l r) = v + treeSum l + treeSum r
+
+roundToTwoDigits :: (Num a, RealFrac a) => a -> Double
+roundToTwoDigits = (/ 100) . fromIntegral . round . (* 100)

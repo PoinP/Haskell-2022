@@ -19,7 +19,7 @@ isPrime x = x > 2 && acc (floor $ sqrt $ fromIntegral x)
 -- Добре е да напишеш truncatablePrime без гардове.
 truncatablePrime :: Int -> Bool
 truncatablePrime 0 = True
-truncatablePrime x = isPrime x && truncatablePrime' (div x 10)
+truncatablePrime x = isPrime x && truncatablePrime (div x 10)
 
 truncatablePrime' :: Int -> Bool
 truncatablePrime' 0 = True

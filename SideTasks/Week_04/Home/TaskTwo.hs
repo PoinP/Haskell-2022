@@ -26,11 +26,16 @@ isPresentRecNonPM n xs
     | n == head xs = True
     | otherwise    = isPresentRecNonPM n $ tail xs
 
-isPresentRecPM :: Int -> [Int] -> Bool
-isPresentRecPM _ []     = False
-isPresentRecPM n (x:xs)
-    | n == x    = True
-    | otherwise = isPresentRecPM n xs
-
 isPresentFunc :: Int -> [Int] -> Bool
 isPresentFunc = elem
+
+isPresentRecPM :: Int -> [Int] -> Bool
+isPresentRecPM _ []     = False
+isPresentRecPM n (x:xs) = x == n || isPresentRecPM n xs
+
+-- Old function
+isPresentRecPM' :: Int -> [Int] -> Bool
+isPresentRecPM' _ []     = False
+isPresentRecPM' n (x:xs)
+    | n == x    = True
+    | otherwise = isPresentRecPM n xs

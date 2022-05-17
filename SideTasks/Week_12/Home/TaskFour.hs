@@ -10,4 +10,4 @@ closestToAverage ms = head [d | (Temp d t) <- ms, t == closestTemp]
     where
         ts = map (\ (Temp _ t) -> t) ms
         average = sum ts / fromIntegral (length ts)
-        closestTemp = foldl (\ min t -> if abs (min - average) > abs (t - average) then t else min) (head ts) ts
+        closestTemp = foldl1 (\t1 t2 -> if abs (t1 - average) > abs (t2 - average) then t2 else t1) ts

@@ -24,5 +24,5 @@ size (Node v cs) = 1 + sum (map size cs)
 
 getLevel :: NTree a -> Int -> [a]
 getLevel Nil _         = []
-getLevel (Node v _) 0 = [v]
+getLevel (Node v _) 0  = [v]
 getLevel (Node _ cs) n = concatMap (\c -> getLevel c (n - 1)) cs
