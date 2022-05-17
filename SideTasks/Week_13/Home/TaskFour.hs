@@ -21,7 +21,8 @@ t4 = Node 10 (Node 1 Nil Nil) (Node 25 Nil (Node 30 (Node 27 Nil Nil) (Node 32 N
 
 traverseTree :: BTree -> [Int]
 traverseTree Nil = []
-traverseTree (Node v l r) = v : traverseTree l ++ traverseTree r
+traverseTree (Node v Nil Nil) = [v]
+traverseTree (Node v l r) = traverseTree l ++ traverseTree r
 
 leavesAreEqual :: BTree -> BTree -> Bool
 leavesAreEqual t1 t2 = sort (traverseTree t1) == sort (traverseTree t2)
