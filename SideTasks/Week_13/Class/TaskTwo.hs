@@ -29,3 +29,25 @@ genWordsFromRoot t = acc t []
 genWords :: BTree Char -> [String]
 genWords Nil = []
 genWords t@(Node c l r) = sort $ nub $ genWordsFromRoot t ++ genWordsFromRoot l ++ genWordsFromRoot r ++ genWords l ++ genWords r
+
+
+--- Second version
+
+-- containsWord :: BTree Char -> [Char] -> Bool
+-- containsWord Nil _ = False
+-- containsWord _ []  = False
+-- containsWord (Node c Nil Nil) [x] = x == c
+-- containsWord (Node c l r) word@(x:xs)
+--     | x /= c = containsWord l word || containsWord r word
+--     | otherwise = acc l xs || acc r xs
+--         where 
+--             acc Nil _ = False
+--             acc _ []  = False
+--             acc (Node c Nil Nil) [x] = c == x
+--             acc (Node c l r) (x:str) = c == x && (acc l str || acc r str)
+
+-- traverseDFS :: BTree Char -> [[Char]]
+-- traverseDFS Nil = []
+-- traverseDFS (Node v l r) = filter containsWord $ nub $ concatMap tails $ map (v:) (traverseDFS l) ++ [[v]] ++ map (v:) (traverseDFS r)
+
+-- Third Method
