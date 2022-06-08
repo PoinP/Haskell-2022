@@ -1,4 +1,5 @@
 import Data.List
+import Data.Char (digitToInt)
 
 main :: IO()
 main = do
@@ -9,7 +10,7 @@ main = do
 
 
 digits :: Int -> [Int]
-digits = reverse . sort . intToList
+digits = reverse . sort . map digitToInt . show
 
 isDecreasing :: [Int] -> Bool
 isDecreasing xs = and [x1 > x2 | (x1, x2) <- zip xs (tail xs)]
